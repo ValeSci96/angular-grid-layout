@@ -356,7 +356,6 @@ const multiItemSeparatedDragBug = [
 ]
 
 @Component({
-    standalone: true,
     selector: 'ktd-multi-item-handler',
     templateUrl: './multi-item-handler.component.html',
     styleUrls: ['./multi-item-handler.component.scss'],

@@ -29,7 +29,6 @@ function generateLayout2(cols: number, size: number) {
 }
 
 @Component({
-    standalone: true,
     selector: 'ktd-scroll-test',
     templateUrl: './scroll-test.component.html',
     styleUrls: ['./scroll-test.component.scss'],

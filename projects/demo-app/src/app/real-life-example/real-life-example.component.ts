@@ -11,7 +11,6 @@ import { KtdFooterComponent } from '../components/footer/footer.component';
 import { KtdTableSortingComponent } from './table-sorting/table-sorting.component';
 
 @Component({
-    standalone: true,
     selector: 'ktd-real-life-example',
     templateUrl: './real-life-example.component.html',
     styleUrls: ['./real-life-example.component.scss'],

@@ -7,7 +7,6 @@ import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    standalone: true,
     selector: 'ktd-custom-handles',
     templateUrl: './custom-handles.component.html',
     styleUrls: ['./custom-handles.component.scss'],

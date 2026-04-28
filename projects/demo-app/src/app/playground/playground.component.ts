@@ -17,7 +17,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    standalone: true,
     selector: 'ktd-playground',
     templateUrl: './playground.component.html',
     styleUrls: ['./playground.component.scss'],

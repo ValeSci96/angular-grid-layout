@@ -9,7 +9,6 @@ import { KtdFooterComponent } from '../components/footer/footer.component';
 
 @Component({
     selector: 'ktd-row-height-fit',
-    standalone: true,
     imports: [CommonModule, KtdGridModule, RouterModule, KtdFooterComponent],
     templateUrl: './row-height-fit.component.html',
     styleUrls: ['./row-height-fit.component.scss']

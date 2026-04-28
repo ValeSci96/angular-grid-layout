@@ -8,7 +8,6 @@ import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 const defaultTitle = 'Angular Grid Layout';
 
 @Component({
-    standalone: true,
     selector: 'ktd-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
