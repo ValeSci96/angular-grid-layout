@@ -10,6 +10,14 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
+"@angular-devkit/architect@>= 0.1800.0 < 0.1900.0":
+  version "0.1802.21"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-devkit/architect/-/architect-0.1802.21.tgz"
+  integrity sha512-+Ll+xtpKwZ3iLWN/YypvnCZV/F0MVbP+/7ZpMR+Xv/uB0OmribhBVj9WGaCd9I/bGgoYBw8wBV/NFNCKkf0k3Q==
+  dependencies:
+    "@angular-devkit/core" "18.2.21"
+    rxjs "7.8.1"
+
 "@angular-devkit/architect@>= 0.900 < 0.1602.0":
   version "0.1601.8"
   resolved "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1601.8.tgz"
@@ -116,6 +124,18 @@
     rxjs "7.8.1"
     source-map "0.7.4"
 
+"@angular-devkit/core@>= 18.0.0 < 19.0.0", "@angular-devkit/core@18.2.21":
+  version "18.2.21"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-devkit/core/-/core-18.2.21.tgz"
+  integrity sha512-Lno6GNbJME85wpc/uqn+wamBxvfZJZFYSH8+oAkkyjU/hk8r5+X8DuyqsKAa0m8t46zSTUsonHsQhVe5vgrZeQ==
+  dependencies:
+    ajv "8.17.1"
+    ajv-formats "3.0.1"
+    jsonc-parser "3.3.1"
+    picomatch "4.0.2"
+    rxjs "7.8.1"
+    source-map "0.7.4"
+
 "@angular-devkit/core@16.1.8":
   version "16.1.8"
   resolved "https://registry.npmjs.org/@angular-devkit/core/-/core-16.1.8.tgz"
@@ -150,6 +170,17 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
+"@angular-devkit/schematics@>= 18.0.0 < 19.0.0":
+  version "18.2.21"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-devkit/schematics/-/schematics-18.2.21.tgz"
+  integrity sha512-yuC2vN4VL48JhnsaOa9J/o0Jl+cxOklRNQp5J2/ypMuRROaVCrZAPiX+ChSHh++kHYMpj8+ggNrrUwRNfMKACQ==
+  dependencies:
+    "@angular-devkit/core" "18.2.21"
+    jsonc-parser "3.3.1"
+    magic-string "0.30.11"
+    ora "5.4.1"
+    rxjs "7.8.1"
+
 "@angular-devkit/schematics@17.3.17":
   version "17.3.17"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-devkit/schematics/-/schematics-17.3.17.tgz"
@@ -161,63 +192,64 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@angular-eslint/builder@~17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/builder/-/builder-17.5.3.tgz"
-  integrity sha512-DoPCwt8qp5oMkfxY8V3wygf6/E7zzgXkPCwTRhIelklfpB3nYwLnbRSD8G5hueAU4eyASKiIuhR79E996AuUSw==
-
-"@angular-eslint/bundled-angular-compiler@17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/bundled-angular-compiler/-/bundled-angular-compiler-17.5.3.tgz"
-  integrity sha512-x9jZ6mME9wxumErPGonWERXX/9TJ7mzEkQhOKt3BxBFm0sy9XQqLMAenp1PBSg3RF3rH7EEVdB2+jb75RtHp0g==
-
-"@angular-eslint/eslint-plugin-template@~17.5.3", "@angular-eslint/eslint-plugin-template@17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/eslint-plugin-template/-/eslint-plugin-template-17.5.3.tgz"
-  integrity sha512-RkRFagxqBPV2xdNyeQQROUm6I1Izto1Z3Wy73lCk2zq1RhVgbznniH/epmOIE8PMkHmMKmZ765FV++J/90p4Ig==
+"@angular-eslint/builder@~18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/builder/-/builder-18.4.3.tgz"
+  integrity sha512-NzmrXlr7GFE+cjwipY/CxBscZXNqnuK0us1mO6Z2T6MeH6m+rRcdlY/rZyKoRniyNNvuzl6vpEsfMIMmnfebrA==
   dependencies:
-    "@angular-eslint/bundled-angular-compiler" "17.5.3"
-    "@angular-eslint/utils" "17.5.3"
-    "@typescript-eslint/type-utils" "7.11.0"
-    "@typescript-eslint/utils" "7.11.0"
-    aria-query "5.3.0"
-    axobject-query "4.0.0"
+    "@angular-devkit/architect" ">= 0.1800.0 < 0.1900.0"
+    "@angular-devkit/core" ">= 18.0.0 < 19.0.0"
 
-"@angular-eslint/eslint-plugin@~17.5.3", "@angular-eslint/eslint-plugin@17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/eslint-plugin/-/eslint-plugin-17.5.3.tgz"
-  integrity sha512-2gMRZ+SkiygrPDtCJwMfjmwIFOcvxxC4NRX/MqRo6udsa0gtqPrc8acRbwrmAXlullmhzmaeUfkHpGDSzW8pFw==
-  dependencies:
-    "@angular-eslint/bundled-angular-compiler" "17.5.3"
-    "@angular-eslint/utils" "17.5.3"
-    "@typescript-eslint/utils" "7.11.0"
+"@angular-eslint/bundled-angular-compiler@18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/bundled-angular-compiler/-/bundled-angular-compiler-18.4.3.tgz"
+  integrity sha512-zdrA8mR98X+U4YgHzUKmivRU+PxzwOL/j8G7eTOvBuq8GPzsP+hvak+tyxlgeGm9HsvpFj9ERHLtJ0xDUPs8fg==
 
-"@angular-eslint/schematics@~17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/schematics/-/schematics-17.5.3.tgz"
-  integrity sha512-a0MlOjNLIM18l/66S+CzhANQR3QH3jDUa1MC50E4KBf1mwjQyfqd6RdfbOTMDjgFlPrfB+5JvoWOHHGj7FFM1A==
+"@angular-eslint/eslint-plugin-template@~18.4.3", "@angular-eslint/eslint-plugin-template@18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/eslint-plugin-template/-/eslint-plugin-template-18.4.3.tgz"
+  integrity sha512-ijGlX2N01ayMXTpeQivOA31AszO8OEbu9ZQUCxnu9AyMMhxyi2q50bujRChAvN9YXQfdQtbxuajxV6+aiWb5BQ==
   dependencies:
-    "@angular-eslint/eslint-plugin" "17.5.3"
-    "@angular-eslint/eslint-plugin-template" "17.5.3"
-    ignore "5.3.1"
+    "@angular-eslint/bundled-angular-compiler" "18.4.3"
+    "@angular-eslint/utils" "18.4.3"
+    aria-query "5.3.2"
+    axobject-query "4.1.0"
+
+"@angular-eslint/eslint-plugin@~18.4.3", "@angular-eslint/eslint-plugin@18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/eslint-plugin/-/eslint-plugin-18.4.3.tgz"
+  integrity sha512-AyJbupiwTBR81P6T59v+aULEnPpZBCBxL2S5QFWfAhNCwWhcof4GihvdK2Z87yhvzDGeAzUFSWl/beJfeFa+PA==
+  dependencies:
+    "@angular-eslint/bundled-angular-compiler" "18.4.3"
+    "@angular-eslint/utils" "18.4.3"
+
+"@angular-eslint/schematics@~18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/schematics/-/schematics-18.4.3.tgz"
+  integrity sha512-D5maKn5e6n58+8n7jLFLD4g+RGPOPeDSsvPc1sqial5tEKLxAJQJS9WZ28oef3bhkob6C60D+1H0mMmEEVvyVA==
+  dependencies:
+    "@angular-devkit/core" ">= 18.0.0 < 19.0.0"
+    "@angular-devkit/schematics" ">= 18.0.0 < 19.0.0"
+    "@angular-eslint/eslint-plugin" "18.4.3"
+    "@angular-eslint/eslint-plugin-template" "18.4.3"
+    ignore "6.0.2"
+    semver "7.6.3"
     strip-json-comments "3.1.1"
-    tmp "0.2.3"
 
-"@angular-eslint/template-parser@~17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/template-parser/-/template-parser-17.5.3.tgz"
-  integrity sha512-NYybOsMkJUtFOW2JWALicipq0kK5+jGwA1MYyRoXjdbDlXltHUb9qkXj7p0fE6uRutBGXDl4288s8g/fZCnAIA==
+"@angular-eslint/template-parser@~18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/template-parser/-/template-parser-18.4.3.tgz"
+  integrity sha512-JZMPtEB8yNip3kg4WDEWQyObSo2Hwf+opq2ElYuwe85GQkGhfJSJ2CQYo4FSwd+c5MUQAqESNRg9QqGYauDsiw==
   dependencies:
-    "@angular-eslint/bundled-angular-compiler" "17.5.3"
-    eslint-scope "^8.0.0"
+    "@angular-eslint/bundled-angular-compiler" "18.4.3"
+    eslint-scope "^8.0.2"
 
-"@angular-eslint/utils@17.5.3":
-  version "17.5.3"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/utils/-/utils-17.5.3.tgz"
-  integrity sha512-0nNm1FUOLhVHrdK2PP5dZCYYVmTIkEJ4CmlwpuC4JtCLbD5XAHQpY/ZW5Ff5n1b7KfJt1Zy//jlhkkIaw3LaBQ==
+"@angular-eslint/utils@18.4.3":
+  version "18.4.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular-eslint/utils/-/utils-18.4.3.tgz"
+  integrity sha512-w0bJ9+ELAEiPBSTPPm9bvDngfu1d8JbzUhvs2vU+z7sIz/HMwUZT5S4naypj2kNN0gZYGYrW0lt+HIbW87zTAQ==
   dependencies:
-    "@angular-eslint/bundled-angular-compiler" "17.5.3"
-    "@typescript-eslint/utils" "7.11.0"
+    "@angular-eslint/bundled-angular-compiler" "18.4.3"
 
 "@angular/animations@^17.0.0 || ^18.0.0", "@angular/animations@^17.3.12", "@angular/animations@>=12.0.0", "@angular/animations@17.3.12":
   version "17.3.12"
@@ -235,7 +267,7 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cli@^17.3.17", "@angular/cli@>= 17.0.0 < 18.0.0":
+"@angular/cli@^17.3.17":
   version "17.3.17"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/@angular/cli/-/cli-17.3.17.tgz"
   integrity sha512-FgOvf9q5d23Cpa7cjP1FYti/v8S1FTm8DEkW3TY8lkkoxh3isu28GFKcLD1p/XF3yqfPkPVHToOFla5QwsEgBQ==
@@ -2716,14 +2748,6 @@
     "@typescript-eslint/visitor-keys" "7.18.0"
     debug "^4.3.4"
 
-"@typescript-eslint/scope-manager@7.11.0":
-  version "7.11.0"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/scope-manager/-/scope-manager-7.11.0.tgz"
-  integrity sha512-27tGdVEiutD4POirLZX4YzT180vevUURJl4wJGmm6TrQoiYwuxTIY98PBp6L2oN+JQxzE0URvYlzJaBHIekXAw==
-  dependencies:
-    "@typescript-eslint/types" "7.11.0"
-    "@typescript-eslint/visitor-keys" "7.11.0"
-
 "@typescript-eslint/scope-manager@7.18.0":
   version "7.18.0"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/scope-manager/-/scope-manager-7.18.0.tgz"
@@ -2731,16 +2755,6 @@
   dependencies:
     "@typescript-eslint/types" "7.18.0"
     "@typescript-eslint/visitor-keys" "7.18.0"
-
-"@typescript-eslint/type-utils@7.11.0":
-  version "7.11.0"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/type-utils/-/type-utils-7.11.0.tgz"
-  integrity sha512-WmppUEgYy+y1NTseNMJ6mCFxt03/7jTOy08bcg7bxJJdsM4nuhnchyBbE8vryveaJUf62noH7LodPSo5Z0WUCg==
-  dependencies:
-    "@typescript-eslint/typescript-estree" "7.11.0"
-    "@typescript-eslint/utils" "7.11.0"
-    debug "^4.3.4"
-    ts-api-utils "^1.3.0"
 
 "@typescript-eslint/type-utils@7.18.0":
   version "7.18.0"
@@ -2752,29 +2766,10 @@
     debug "^4.3.4"
     ts-api-utils "^1.3.0"
 
-"@typescript-eslint/types@7.11.0":
-  version "7.11.0"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/types/-/types-7.11.0.tgz"
-  integrity sha512-MPEsDRZTyCiXkD4vd3zywDCifi7tatc4K37KqTprCvaXptP7Xlpdw0NR2hRJTetG5TxbWDB79Ys4kLmHliEo/w==
-
-"@typescript-eslint/types@7.18.0":
+"@typescript-eslint/types@^7.11.0 || ^8.0.0", "@typescript-eslint/types@7.18.0":
   version "7.18.0"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/types/-/types-7.18.0.tgz"
   integrity sha512-iZqi+Ds1y4EDYUtlOOC+aUmxnE9xS/yCigkjA7XpTKV6nCBd3Hp/PRGGmdwnfkV2ThMyYldP1wRpm/id99spTQ==
-
-"@typescript-eslint/typescript-estree@7.11.0":
-  version "7.11.0"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/typescript-estree/-/typescript-estree-7.11.0.tgz"
-  integrity sha512-cxkhZ2C/iyi3/6U9EPc5y+a6csqHItndvN/CzbNXTNrsC3/ASoYQZEt9uMaEp+xFNjasqQyszp5TumAVKKvJeQ==
-  dependencies:
-    "@typescript-eslint/types" "7.11.0"
-    "@typescript-eslint/visitor-keys" "7.11.0"
-    debug "^4.3.4"
-    globby "^11.1.0"
-    is-glob "^4.0.3"
-    minimatch "^9.0.4"
-    semver "^7.6.0"
-    ts-api-utils "^1.3.0"
 
 "@typescript-eslint/typescript-estree@7.18.0":
   version "7.18.0"
@@ -2790,17 +2785,7 @@
     semver "^7.6.0"
     ts-api-utils "^1.3.0"
 
-"@typescript-eslint/utils@7.11.0":
-  version "7.11.0"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/utils/-/utils-7.11.0.tgz"
-  integrity sha512-xlAWwPleNRHwF37AhrZurOxA1wyXowW4PqVXZVUNCLjB48CqdPJoJWkrpH2nij9Q3Lb7rtWindtoXwxjxlKKCA==
-  dependencies:
-    "@eslint-community/eslint-utils" "^4.4.0"
-    "@typescript-eslint/scope-manager" "7.11.0"
-    "@typescript-eslint/types" "7.11.0"
-    "@typescript-eslint/typescript-estree" "7.11.0"
-
-"@typescript-eslint/utils@7.18.0":
+"@typescript-eslint/utils@^7.11.0 || ^8.0.0", "@typescript-eslint/utils@7.18.0":
   version "7.18.0"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/utils/-/utils-7.18.0.tgz"
   integrity sha512-kK0/rNa2j74XuHVcoCZxdFBMF+aq/vH83CXAOHieC+2Gis4mF8jJXT5eAfyD3K0sAxtPuwxaIOIOvhwzVDt/kw==
@@ -2809,14 +2794,6 @@
     "@typescript-eslint/scope-manager" "7.18.0"
     "@typescript-eslint/types" "7.18.0"
     "@typescript-eslint/typescript-estree" "7.18.0"
-
-"@typescript-eslint/visitor-keys@7.11.0":
-  version "7.11.0"
-  resolved "https://elco-nexus01.elco.local/repository/npm-group/@typescript-eslint/visitor-keys/-/visitor-keys-7.11.0.tgz"
-  integrity sha512-7syYk4MzjxTEk0g/w3iqtgxnFQspDJfn6QKD36xMuuhTzjcxY7F8EmBLnALjVyaOF1/bVocu3bS/2/F7rXrveQ==
-  dependencies:
-    "@typescript-eslint/types" "7.11.0"
-    eslint-visitor-keys "^3.4.3"
 
 "@typescript-eslint/visitor-keys@7.18.0":
   version "7.18.0"
@@ -3045,6 +3022,13 @@ ajv-formats@^2.1.1, ajv-formats@2.1.1:
   dependencies:
     ajv "^8.0.0"
 
+ajv-formats@3.0.1:
+  version "3.0.1"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/ajv-formats/-/ajv-formats-3.0.1.tgz"
+  integrity sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==
+  dependencies:
+    ajv "^8.0.0"
+
 ajv-keywords@^3.5.2:
   version "3.5.2"
   resolved "https://registry.npmjs.org/ajv-keywords/-/ajv-keywords-3.5.2.tgz"
@@ -3096,6 +3080,16 @@ ajv@^8.0.0, ajv@^8.12.0, ajv@^8.8.2, ajv@^8.9.0, ajv@8.12.0:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
+
+ajv@8.17.1:
+  version "8.17.1"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/ajv/-/ajv-8.17.1.tgz"
+  integrity sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    fast-uri "^3.0.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
 
 angular-cli-ghpages@~1.0.0:
   version "1.0.7"
@@ -3187,12 +3181,10 @@ argparse@^2.0.1:
   resolved "https://elco-nexus01.elco.local/repository/npm-group/argparse/-/argparse-2.0.1.tgz"
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
-aria-query@5.3.0:
-  version "5.3.0"
-  resolved "https://registry.npmjs.org/aria-query/-/aria-query-5.3.0.tgz"
-  integrity sha512-b0P0sZPKtyu8HkeRAfCq0IfURZK+SuwMjY1UXGBU27wpAiTwQAIlq56IbIO+ytk/JjS1fMR14ee5WBBfKi5J6A==
-  dependencies:
-    dequal "^2.0.3"
+aria-query@5.3.2:
+  version "5.3.2"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/aria-query/-/aria-query-5.3.2.tgz"
+  integrity sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==
 
 array-flatten@1.1.1:
   version "1.1.1"
@@ -3277,12 +3269,10 @@ aws4@^1.8.0:
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.13.0.tgz"
   integrity sha512-3AungXC4I8kKsS9PuS4JH2nc+0bVY/mjgrephHTIi8fpEeGsTHBUJeosp0Wc1myYMElmD0B3Oc4XL/HVJ4PV2g==
 
-axobject-query@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/axobject-query/-/axobject-query-4.0.0.tgz"
-  integrity sha512-+60uv1hiVFhHZeO+Lz0RYzsVHy5Wr1ayX0mwda9KPDVLNJgZ1T9Ny7VmFbLDzxsH0D87I86vgj3gFrjTJUYznw==
-  dependencies:
-    dequal "^2.0.3"
+axobject-query@4.1.0:
+  version "4.1.0"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/axobject-query/-/axobject-query-4.1.0.tgz"
+  integrity sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ==
 
 babel-loader@9.1.3:
   version "9.1.3"
@@ -4509,11 +4499,6 @@ dependency-graph@^1.0.0:
   resolved "https://elco-nexus01.elco.local/repository/npm-group/dependency-graph/-/dependency-graph-1.0.0.tgz"
   integrity sha512-cW3gggJ28HZ/LExwxP2B++aiKxhJXMSIt9K48FOXQkm+vuG5gyatXnLsONRJdzO/7VfjDIiaOOa/bs4l464Lwg==
 
-dequal@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz"
-  integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
-
 destroy@~1.2.0, destroy@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz"
@@ -4892,7 +4877,7 @@ eslint-scope@^7.2.2:
     esrecurse "^4.3.0"
     estraverse "^5.2.0"
 
-eslint-scope@^8.0.0:
+eslint-scope@^8.0.2:
   version "8.4.0"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/eslint-scope/-/eslint-scope-8.4.0.tgz"
   integrity sha512-sNXOfKCn74rt8RICKMvJS7XKV/Xk9kA7DyJr8mJik3S7Cwgy3qlkkmyS2uQB3jiJg6VNdZd/pDBJu0nvG2NlTg==
@@ -4913,7 +4898,7 @@ eslint-visitor-keys@^3.4.1, eslint-visitor-keys@^3.4.3:
   resolved "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz"
   integrity sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==
 
-"eslint@^6.0.0 || ^7.0.0 || >=8.0.0", "eslint@^7.0.0 || ^8.0.0", "eslint@^7.20.0 || ^8.0.0", eslint@^8.56.0, eslint@^8.57.0:
+"eslint@^6.0.0 || ^7.0.0 || >=8.0.0", "eslint@^7.0.0 || ^8.0.0", eslint@^8.56.0, eslint@^8.57.0, "eslint@^8.57.0 || ^9.0.0":
   version "8.57.1"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/eslint/-/eslint-8.57.1.tgz"
   integrity sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==
@@ -5133,6 +5118,11 @@ fast-levenshtein@^2.0.6:
   version "2.0.6"
   resolved "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
+
+fast-uri@^3.0.1:
+  version "3.1.0"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/fast-uri/-/fast-uri-3.1.0.tgz"
+  integrity sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==
 
 fastq@^1.6.0:
   version "1.17.1"
@@ -6005,10 +5995,15 @@ ignore-walk@^6.0.4:
   dependencies:
     minimatch "^9.0.0"
 
-ignore@^5.2.0, ignore@^5.2.4, ignore@^5.3.1, ignore@5.3.1:
+ignore@^5.2.0, ignore@^5.2.4, ignore@^5.3.1:
   version "5.3.1"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/ignore/-/ignore-5.3.1.tgz"
   integrity sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==
+
+ignore@6.0.2:
+  version "6.0.2"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/ignore/-/ignore-6.0.2.tgz"
+  integrity sha512-InwqeHHN2XpumIkMvpl/DCJVrAHgCsG5+cn1XlnLWGwtZBm8QJfSusItfrwx81CTp5agNZqpKU2J/ccC5nGT4A==
 
 image-size@~0.5.0:
   version "0.5.5"
@@ -6522,6 +6517,11 @@ jsonc-parser@3.2.1:
   resolved "https://elco-nexus01.elco.local/repository/npm-group/jsonc-parser/-/jsonc-parser-3.2.1.tgz"
   integrity sha512-AilxAyFOAcK5wA1+LeaySVBrHsGQvUFCDWXKpZjzaL0PqW+xfBOttn8GNtWKFWqneyMZj41MWF9Kl6iPWLwgOA==
 
+jsonc-parser@3.3.1:
+  version "3.3.1"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/jsonc-parser/-/jsonc-parser-3.3.1.tgz"
+  integrity sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==
+
 jsonfile@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz"
@@ -6860,6 +6860,13 @@ magic-string@0.30.1:
   integrity sha512-mbVKXPmS0z0G4XqFDCTllmDQ6coZzn94aMlb0o/A4HEHJCKcanlDZwYJgwnkmgD3jyWhUgj9VsPrfd972yPffA==
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
+
+magic-string@0.30.11:
+  version "0.30.11"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/magic-string/-/magic-string-0.30.11.tgz"
+  integrity sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.5.0"
 
 magic-string@0.30.8:
   version "0.30.8"
@@ -7815,6 +7822,11 @@ picomatch@4.0.1:
   resolved "https://elco-nexus01.elco.local/repository/npm-group/picomatch/-/picomatch-4.0.1.tgz"
   integrity sha512-xUXwsxNjwTQ8K3GnT4pCJm+xq3RUPQbmkYJTP5aFIfNIvbcc/4MUxgBaaRSZJ6yGJZiGSyYlM6MzwTsRk8SYCg==
 
+picomatch@4.0.2:
+  version "4.0.2"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/picomatch/-/picomatch-4.0.2.tgz"
+  integrity sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==
+
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz"
@@ -8666,6 +8678,11 @@ semver@7.6.0:
   dependencies:
     lru-cache "^6.0.0"
 
+semver@7.6.3:
+  version "7.6.3"
+  resolved "https://elco-nexus01.elco.local/repository/npm-group/semver/-/semver-7.6.3.tgz"
+  integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
+
 send@~0.19.0, send@~0.19.1:
   version "0.19.2"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/send/-/send-0.19.2.tgz"
@@ -9334,7 +9351,7 @@ tmp@^0.0.33:
   dependencies:
     os-tmpdir "~1.0.2"
 
-tmp@^0.2.1, tmp@0.2.3:
+tmp@^0.2.1:
   version "0.2.3"
   resolved "https://elco-nexus01.elco.local/repository/npm-group/tmp/-/tmp-0.2.3.tgz"
   integrity sha512-nZD7m9iCPC5g0pYmcaxogYKggSfLsdxl8of3Q/oIbqCqLLIO9IAF0GWjX1z9NZRHPiXv8Wex4yDCaZsgEw0Y8w==
