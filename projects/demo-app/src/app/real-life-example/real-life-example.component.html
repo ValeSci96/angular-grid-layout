@@ -3,106 +3,74 @@
               [rowHeight]="rowHeight"
               [layout]="layout"
               [scrollableParent]="document"
-              [compactType]="compactType"
-              (layoutUpdated)="onLayoutUpdated($event)"
-              (gridItemResize)="onGridItemResize($event)">
+              [compactType]="compactType">
         <ktd-grid-item id="0" minW="4">
-            <ngx-charts-bar-vertical-stacked
-                [view]="layoutSizes['0']"
-                [scheme]="colorScheme2"
-                [results]="countriesPopulationByYear"
-                [gradient]="false"
-                [xAxis]="xAxis"
-                [yAxis]="yAxis"
-                [legend]="true"
-                [showXAxisLabel]="showXAxisLabel"
-                [showYAxisLabel]="showYAxisLabel"
-                [xAxisLabel]="xAxisLabel"
-                [yAxisLabel]="yAxisLabel"
-                [animations]="animations"
-                (select)="onSelect('0', $event)">
-            </ngx-charts-bar-vertical-stacked>
+            <div class="info-panel">
+                <p class="eyebrow">Example 01</p>
+                <h2>Responsive grid cards</h2>
+                <p>
+                    Questa demo mostra contenuti reali dentro il layout: testi, tabelle e blocchi
+                    riordinabili senza dipendere da librerie chart esterne.
+                </p>
+                <ul>
+                    <li>drag & resize</li>
+                    <li>placeholder custom</li>
+                    <li>contenuti eterogenei</li>
+                </ul>
+            </div>
             <ng-template ktdGridItemPlaceholder>
                 <div class="custom-placeholder-container">
-                    <ngx-charts-bar-vertical-stacked
-                        [view]="layoutSizes['0']"
-                        [scheme]="colorScheme2"
-                        [results]="countriesPopulationByYear"
-                        [gradient]="false"
-                        [xAxis]="xAxis"
-                        [yAxis]="yAxis"
-                        [legend]="true"
-                        [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel"
-                        [xAxisLabel]="xAxisLabel"
-                        [yAxisLabel]="yAxisLabel"
-                        [animations]="false"
-                        (select)="onSelect('0', $event)">
-                    </ngx-charts-bar-vertical-stacked>
+                    <div class="info-panel placeholder">
+                        <p class="eyebrow">Example 01</p>
+                        <h2>Responsive grid cards</h2>
+                    </div>
                 </div>
             </ng-template>
         </ktd-grid-item>
         <ktd-grid-item id="1">
-            <ngx-charts-bar-horizontal-2d
-                [view]="layoutSizes['1']"
-                [scheme]="colorSchemeGradientLinear"
-                [schemeType]="schemeType"
-                [results]="countriesPopulationByYear"
-                [gradient]="false"
-                [xAxis]="xAxis"
-                [yAxis]="yAxis"
-                [legend]="false"
-                [legendPosition]="legendBelow"
-                [showXAxisLabel]="showXAxisLabel"
-                [showYAxisLabel]="showYAxisLabel"
-                [xAxisLabel]="yAxisLabel"
-                [yAxisLabel]="xAxisLabel"
-                (select)="onSelect('1', $event)"
-                (activate)="onActivate('1', $event)"
-                (deactivate)="onDeactivate('1', $event)">
-            </ngx-charts-bar-horizontal-2d>
+            <div class="info-panel info-panel-alt">
+                <p class="eyebrow">Example 02</p>
+                <h2>Drag handles and sorting</h2>
+                <p>
+                    Il contenuto della card resta semplice, così l'attenzione va sulla
+                    composizione della griglia e sulle interazioni del layout.
+                </p>
+                <div class="metric-row">
+                    <span>Resizable</span>
+                    <strong>Yes</strong>
+                </div>
+                <div class="metric-row">
+                    <span>Stand-alone</span>
+                    <strong>Yes</strong>
+                </div>
+            </div>
             <ng-template ktdGridItemPlaceholder>
                 <div class="custom-placeholder-container">
-                    <ngx-charts-bar-horizontal-2d
-                        [view]="layoutSizes['1']"
-                        [scheme]="colorSchemeGradientLinear"
-                        [schemeType]="schemeType"
-                        [results]="countriesPopulationByYear"
-                        [gradient]="false"
-                        [xAxis]="xAxis"
-                        [yAxis]="yAxis"
-                        [legend]="false"
-                        [animations]="false"
-                        [legendPosition]="legendBelow"
-                        [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel"
-                        [xAxisLabel]="yAxisLabel"
-                        [yAxisLabel]="xAxisLabel">
-                    </ngx-charts-bar-horizontal-2d>
+                    <div class="info-panel info-panel-alt placeholder">
+                        <p class="eyebrow">Example 02</p>
+                        <h2>Drag handles and sorting</h2>
+                    </div>
                 </div>
             </ng-template>
         </ktd-grid-item>
         <ktd-grid-item id="2">
-            <ngx-charts-tree-map
-                [view]="layoutSizes['2']"
-                [scheme]="colorScheme"
-                [results]="countriesPopulation"
-                [gradient]="false"
-                [animations]="true"
-                [labelFormatting]="labelFormatting"
-                (select)="onSelect('2', $event)">
-            </ngx-charts-tree-map>
+            <div class="info-panel info-panel-compact">
+                <p class="eyebrow">Example 03</p>
+                <h2>Layout data</h2>
+                <p>
+                    I dati del layout vengono aggiornati dal componente grid e non dipendono da
+                    rendering di grafici o da librerie visuali terze.
+                </p>
+                <p class="mini-note">
+                    Questo pannello sostituisce il vecchio tree map.
+                </p>
+            </div>
             <ng-template ktdGridItemPlaceholder>
                 <div class="custom-placeholder-container">
-                    <ngx-charts-tree-map
-                        #chart
-                        [view]="layoutSizes['2']"
-                        [scheme]="colorScheme"
-                        [results]="countriesPopulation"
-                        [gradient]="false"
-                        [animations]="false"
-                        [labelFormatting]="labelFormatting">
-                    </ngx-charts-tree-map>
+                    <div class="info-panel info-panel-compact placeholder">
+                        <p class="eyebrow">Example 03</p>
+                        <h2>Layout data</h2>
+                    </div>
                 </div>
             </ng-template>
         </ktd-grid-item>
@@ -121,30 +89,25 @@
             </ng-template>
         </ktd-grid-item>
         <ktd-grid-item id="5">
-            <ngx-charts-pie-chart
-                [view]="layoutSizes['5']"
-                [scheme]="colorScheme"
-                [results]="countriesPopulation"
-                [gradient]="false"
-                [legend]="false"
-                [labels]="showLabels"
-                [doughnut]="false"
-                (select)="onSelect('5', $event)"
-                (activate)="onActivate('5', $event)"
-                (deactivate)="onDeactivate('5', $event)">
-            </ngx-charts-pie-chart>
+            <div class="info-panel info-panel-summary">
+                <p class="eyebrow">Example 04</p>
+                <h2>Practical usage</h2>
+                <p>
+                    Un mix di contenuti diversi aiuta a validare il grid layout senza trascinarsi
+                    dietro pacchetti grafici inutilizzati.
+                </p>
+                <ul class="compact-list">
+                    <li>interazioni</li>
+                    <li>placeholder</li>
+                    <li>adattamento width/height</li>
+                </ul>
+            </div>
             <ng-template ktdGridItemPlaceholder>
                 <div class="custom-placeholder-container">
-                    <ngx-charts-pie-chart
-                        [view]="layoutSizes['5']"
-                        [scheme]="colorScheme"
-                        [results]="countriesPopulation"
-                        [gradient]="false"
-                        [legend]="false"
-                        [labels]="showLabels"
-                        [animations]="false"
-                        [doughnut]="false">
-                    </ngx-charts-pie-chart>
+                    <div class="info-panel info-panel-summary placeholder">
+                        <p class="eyebrow">Example 04</p>
+                        <h2>Practical usage</h2>
+                    </div>
                 </div>
             </ng-template>
         </ktd-grid-item>
