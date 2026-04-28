@@ -1,8 +1,8 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { KtdGridComponent, KtdGridLayout, ktdTrackById, KtdGridItemComponent, KtdGridDragHandle, KtdGridResizeHandle } from '@katoid/angular-grid-layout';
-import { DOCUMENT, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 

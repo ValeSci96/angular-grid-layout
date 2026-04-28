@@ -1,8 +1,8 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
 import { KtdGridComponent, KtdGridLayout, ktdTrackById, KtdGridItemComponent } from '@katoid/angular-grid-layout';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DOCUMENT, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatInputModule } from '@angular/material/input';

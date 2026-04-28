@@ -1,10 +1,10 @@
-import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { KtdDragEnd, KtdDragStart, ktdGridCompact, KtdGridComponent, KtdGridLayout, KtdGridLayoutItem, KtdResizeEnd, KtdResizeStart, ktdTrackById, KtdGridItemComponent, KtdGridItemPlaceholder } from '@katoid/angular-grid-layout';
 import { ktdArrayRemoveItem } from '../utils';
-import { DOCUMENT, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { KtdGridBackgroundCfg } from '../../../../angular-grid-layout/src/lib/grid.definitions';

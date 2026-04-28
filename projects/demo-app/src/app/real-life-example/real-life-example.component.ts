@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
 import {
     KtdGridComponent, KtdGridItemResizeEvent, KtdGridLayout, ktdTrackById, KtdGridItemComponent, KtdGridItemPlaceholder, KtdGridDragHandle
 } from '@katoid/angular-grid-layout';
@@ -6,7 +6,7 @@ import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { countriesPopulation, countriesPopulationByYear } from './data/countries-population.data';
 import { Color, LegendPosition, ScaleType, BarChartModule, TreeMapModule, PieChartModule } from '@swimlane/ngx-charts';
-import { DOCUMENT } from '@angular/common';
+
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { KtdTableSortingComponent } from './table-sorting/table-sorting.component';
 

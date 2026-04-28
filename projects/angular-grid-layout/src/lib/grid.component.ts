@@ -1,6 +1,7 @@
 import {
-    AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EmbeddedViewRef, EventEmitter, Inject, Input,
-    NgZone, OnChanges, OnDestroy, Output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation
+  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EmbeddedViewRef, EventEmitter, Inject, Input,
+  NgZone, OnChanges, OnDestroy, Output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation,
+  DOCUMENT
 } from '@angular/core';
 import { coerceNumberProperty, NumberInput } from './coercion/number-property';
 import { KtdGridItemComponent } from './grid-item/grid-item.component';
@@ -19,7 +20,7 @@ import { ktdGetScrollTotalRelativeDifference$, ktdScrollIfNearElementClientRect$
 import { BooleanInput, coerceBooleanProperty } from './coercion/boolean-property';
 import { KtdGridItemPlaceholder } from './directives/placeholder';
 import { getTransformTransitionDurationInMs } from './utils/transition-duration';
-import { DOCUMENT } from '@angular/common';
+
 
 interface KtdDragResizeEvent {
     layout: KtdGridLayout;

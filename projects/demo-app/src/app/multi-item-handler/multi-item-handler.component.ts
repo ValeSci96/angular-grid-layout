@@ -1,11 +1,11 @@
-import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import {
     KtdDragEnd, KtdDragStart, ktdGridCompact, KtdGridComponent, KtdGridItemComponent, KtdGridItemPlaceholder, KtdGridLayout, KtdGridLayoutItem,
     ktdGridSortLayoutItems, KtdResizeEnd, KtdResizeStart, ktdTrackById
 } from '@katoid/angular-grid-layout';
 import { ktdArrayRemoveItem } from '../utils';
-import { DOCUMENT, NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatInputModule } from '@angular/material/input';

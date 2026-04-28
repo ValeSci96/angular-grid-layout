@@ -1,6 +1,7 @@
 import {
-    AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, HostBinding, Inject, Input, NgZone, OnDestroy, OnInit,
-    QueryList, Renderer2, ViewChild
+  AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, HostBinding, Inject, Input, NgZone, OnDestroy, OnInit,
+  QueryList, Renderer2, ViewChild,
+  DOCUMENT
 } from '@angular/core';
 import { BehaviorSubject, NEVER, Observable, Subject, Subscription, iif, merge } from 'rxjs';
 import { exhaustMap, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
@@ -13,7 +14,7 @@ import { GRID_ITEM_GET_RENDER_DATA_TOKEN, KtdGridItemRenderDataTokenType } from 
 import { KtdGridService } from '../grid.service';
 import { ktdOutsideZone } from '../utils/operators';
 import { ktdIsMouseEventOrMousePointerEvent, ktdPointerClient, ktdPointerDown, ktdPointerUp } from '../utils/pointer.utils';
-import { DOCUMENT } from '@angular/common';
+
 
 @Component({
     standalone: true,
