@@ -146,18 +146,6 @@
             "scripts": []
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/demo-app/e2e/protractor.conf.js",
-            "devServerTarget": "demo-app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "demo-app:serve:production"
-            }
-          }
-        },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {}
