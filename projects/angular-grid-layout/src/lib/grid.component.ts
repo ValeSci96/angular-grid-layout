@@ -734,7 +734,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
             const duration = getTransformTransitionDurationInMs(gridItem.elementRef.nativeElement);
 
             if (duration === 0) {
-                observer.next();
+                observer.next(undefined);
                 observer.complete();
                 return;
             }
@@ -745,7 +745,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                     this.renderer.removeClass(gridItem.elementRef.nativeElement, 'ktd-grid-item-animating');
                     removeEventListener();
                     clearTimeout(timeout);
-                    observer.next();
+                    observer.next(undefined);
                     observer.complete();
                 }
             }) as EventListener;
