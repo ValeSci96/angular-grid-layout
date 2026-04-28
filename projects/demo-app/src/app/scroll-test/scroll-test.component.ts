@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angu
 import { KtdGridComponent, KtdGridLayout, ktdTrackById, KtdGridItemComponent } from '@katoid/angular-grid-layout';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NgFor } from '@angular/common';
+
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatInputModule } from '@angular/material/input';
@@ -32,7 +32,7 @@ function generateLayout2(cols: number, size: number) {
     selector: 'ktd-scroll-test',
     templateUrl: './scroll-test.component.html',
     styleUrls: ['./scroll-test.component.scss'],
-    imports: [MatFormFieldModule, MatInputModule, KtdGridComponent, NgFor, KtdGridItemComponent, KtdFooterComponent]
+    imports: [MatFormFieldModule, MatInputModule, KtdGridComponent, KtdGridItemComponent, KtdFooterComponent]
 })
 export class KtdScrollTestComponent implements OnInit, OnDestroy {
     @ViewChild('grid1', {static: true, read: KtdGridComponent}) grid1: KtdGridComponent;

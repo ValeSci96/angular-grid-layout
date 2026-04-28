@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angu
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { KtdGridComponent, KtdGridLayout, ktdTrackById, KtdGridItemComponent, KtdGridDragHandle, KtdGridResizeHandle } from '@katoid/angular-grid-layout';
-import { NgFor } from '@angular/common';
+
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
     selector: 'ktd-custom-handles',
     templateUrl: './custom-handles.component.html',
     styleUrls: ['./custom-handles.component.scss'],
-    imports: [KtdGridComponent, NgFor, KtdGridItemComponent, KtdGridDragHandle, MatIconModule, KtdGridResizeHandle, KtdFooterComponent]
+    imports: [KtdGridComponent, KtdGridItemComponent, KtdGridDragHandle, MatIconModule, KtdGridResizeHandle, KtdFooterComponent]
 })
 export class KtdCustomHandlesComponent implements OnInit, OnDestroy {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;

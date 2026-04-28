@@ -5,7 +5,7 @@ import {
     ktdGridSortLayoutItems, KtdResizeEnd, KtdResizeStart, ktdTrackById
 } from '@katoid/angular-grid-layout';
 import { ktdArrayRemoveItem } from '../utils';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { MatInputModule } from '@angular/material/input';
@@ -360,19 +360,18 @@ const multiItemSeparatedDragBug = [
     templateUrl: './multi-item-handler.component.html',
     styleUrls: ['./multi-item-handler.component.scss'],
     imports: [
-        MatButtonModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatInputModule,
-        MatCheckboxModule,
-        NgFor,
-        NgClass,
-        KtdGridComponent,
-        KtdGridItemComponent,
-        KtdFooterComponent
-    ]
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatInputModule,
+    MatCheckboxModule,
+    NgClass,
+    KtdGridComponent,
+    KtdGridItemComponent,
+    KtdFooterComponent
+]
 })
 export class KtdMultiItemHandlerComponent implements OnInit, OnDestroy {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;

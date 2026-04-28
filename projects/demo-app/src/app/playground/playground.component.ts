@@ -4,7 +4,7 @@ import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { KtdDragEnd, KtdDragStart, ktdGridCompact, KtdGridComponent, KtdGridLayout, KtdGridLayoutItem, KtdResizeEnd, KtdResizeStart, ktdTrackById, KtdGridItemComponent, KtdGridItemPlaceholder } from '@katoid/angular-grid-layout';
 import { ktdArrayRemoveItem } from '../utils';
-import { NgFor, NgIf } from '@angular/common';
+
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { KtdGridBackgroundCfg } from '../../../../angular-grid-layout/src/lib/grid.definitions';
@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
     selector: 'ktd-playground',
     templateUrl: './playground.component.html',
     styleUrls: ['./playground.component.scss'],
-    imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule, MatCheckboxModule, NgFor, NgIf, MatChipsModule, ColorPickerModule, KtdGridComponent, KtdGridItemComponent, KtdGridItemPlaceholder, KtdFooterComponent]
+    imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule, MatCheckboxModule, MatChipsModule, ColorPickerModule, KtdGridComponent, KtdGridItemComponent, KtdGridItemPlaceholder, KtdFooterComponent]
 })
 export class KtdPlaygroundComponent implements OnInit, OnDestroy {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;

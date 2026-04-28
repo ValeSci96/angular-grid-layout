@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { KtdGridModule, KtdGridComponent, KtdGridLayout, ktdTrackById } from '@katoid/angular-grid-layout';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { KtdFooterComponent } from '../components/footer/footer.component';
 
 @Component({
     selector: 'ktd-row-height-fit',
-    imports: [CommonModule, KtdGridModule, RouterModule, KtdFooterComponent],
+    imports: [KtdGridModule, RouterModule, KtdFooterComponent],
     templateUrl: './row-height-fit.component.html',
     styleUrls: ['./row-height-fit.component.scss']
 })
