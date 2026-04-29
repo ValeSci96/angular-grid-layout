@@ -297,7 +297,7 @@ export class KtdGridComponent implements AfterContentInit, AfterContentChecked {
         this.applyBackgroundConfig(nextInputs.backgroundConfig);
 
         if (nextInputs.rowHeight === 'fit' && nextInputs.height == null) {
-            console.warn(`KtdGridComponent: The @Input() height should not be null when using rowHeight 'fit'`);
+            console.warn(`KtdGridComponent: The height input should not be null when using rowHeight 'fit'`);
         }
 
         const changes = {
