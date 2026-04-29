@@ -1,5 +1,5 @@
 import {
-  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, DestroyRef, DOCUMENT, ElementRef, EmbeddedViewRef, inject, Input,
+  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, DestroyRef, DOCUMENT, ElementRef, EmbeddedViewRef, inject, Input, input,
   NgZone, OnChanges, output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -164,73 +164,39 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
      * Parent element that contains the scroll. If an string is provided it would search that element by id on the dom.
      * If no data provided or null autoscroll is not performed.
      */
-    @Input() scrollableParent: HTMLElement | Document | string | null = null;
+    readonly scrollableParent = input<HTMLElement | Document | string | null>(null);
 
     /** Whether or not to update the internal layout when some dependent property change. */
-    @Input()
-    get compactOnPropsChange(): boolean { return this._compactOnPropsChange; }
-
-    set compactOnPropsChange(value: boolean) {
-        this._compactOnPropsChange = coerceBooleanProperty(value);
-    }
-
-    private _compactOnPropsChange: boolean = true;
+    readonly compactOnPropsChange = input(true, {
+        transform: (value: BooleanInput) => coerceBooleanProperty(value)
+    });
 
     /** If true, grid items won't change position when being dragged over. Handy when using no compaction */
-    @Input()
-    get preventCollision(): boolean { return this._preventCollision; }
-
-    set preventCollision(value: boolean) {
-        this._preventCollision = coerceBooleanProperty(value);
-    }
-
-    private _preventCollision: boolean = false;
+    readonly preventCollision = input(false, {
+        transform: (value: BooleanInput) => coerceBooleanProperty(value)
+    });
 
     /** Number of CSS pixels that would be scrolled on each 'tick' when auto scroll is performed. */
-    @Input()
-    get scrollSpeed(): number { return this._scrollSpeed; }
-
-    set scrollSpeed(value: number) {
-        this._scrollSpeed = coerceNumberProperty(value, 2);
-    }
-
-    private _scrollSpeed: number = 2;
+    readonly scrollSpeed = input(2, {
+        transform: (value: NumberInput) => coerceNumberProperty(value, 2)
+    });
 
     /** Type of compaction that will be applied to the layout (vertical, horizontal or free). Defaults to 'vertical' */
-    @Input()
-    get compactType(): KtdGridCompactType {
-        return this._compactType;
-    }
-
-    set compactType(val: KtdGridCompactType) {
-        this._compactType = val;
-    }
-
-    private _compactType: KtdGridCompactType = 'vertical';
+    readonly compactType = input<KtdGridCompactType>('vertical');
 
     /**
      * Row height as number or as 'fit'.
      * If rowHeight is a number value, it means that each row would have those css pixels in height.
      * if rowHeight is 'fit', it means that rows will fit in the height available. If 'fit' value is set, a 'height' should be also provided.
      */
-    @Input()
-    get rowHeight(): number | 'fit' { return this._rowHeight; }
-
-    set rowHeight(val: number | 'fit') {
-        this._rowHeight = val === 'fit' ? val : Math.max(1, Math.round(coerceNumberProperty(val)));
-    }
-
-    private _rowHeight: number | 'fit' = 100;
+    readonly rowHeight = input<number | 'fit', NumberInput | 'fit'>(100, {
+        transform: (value: NumberInput | 'fit') => value === 'fit' ? value : Math.max(1, Math.round(coerceNumberProperty(value)))
+    });
 
     /** Number of columns  */
-    @Input()
-    get cols(): number { return this._cols; }
-
-    set cols(val: number) {
-        this._cols = Math.max(1, Math.round(coerceNumberProperty(val)));
-    }
-
-    private _cols: number = 6;
+    readonly cols = input(6, {
+        transform: (value: NumberInput) => Math.max(1, Math.round(coerceNumberProperty(value)))
+    });
 
     /** Layout of the grid. Array of all the grid items with its 'id' and position on the grid. */
     @Input()
@@ -252,16 +218,9 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     private _layout: KtdGridLayout;
 
     /** Grid gap in css pixels */
-    @Input()
-    get gap(): number {
-        return this._gap;
-    }
-
-    set gap(val: number) {
-        this._gap = Math.max(coerceNumberProperty(val), 0);
-    }
-
-    private _gap: number = 0;
+    readonly gap = input(0, {
+        transform: (value: NumberInput) => Math.max(coerceNumberProperty(value), 0)
+    });
 
 
     /**
@@ -269,16 +228,9 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
      * If height is null, height will be automatically set according to its inner grid items.
      * Defaults to null.
      * */
-    @Input()
-    get height(): number | null {
-        return this._height;
-    }
-
-    set height(val: number | null) {
-        this._height = typeof val === 'number' ? Math.max(val, 0) : null;
-    }
-
-    private _height: number | null = null;
+    readonly height = input<number | null, number | null>(null, {
+        transform: (value: number | null) => typeof value === 'number' ? Math.max(value, 0) : null
+    });
 
     /**
      * Multiple items drag/resize
@@ -332,12 +284,12 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
 
     get config(): KtdGridCfg {
         return {
-            cols: this.cols,
-            rowHeight: this.rowHeight,
-            height: this.height,
+            cols: this.cols(),
+            rowHeight: this.rowHeight(),
+            height: this.height(),
             layout: this.layout,
-            preventCollision: this.preventCollision,
-            gap: this.gap,
+            preventCollision: this.preventCollision(),
+            gap: this.gap(),
         };
     }
 
@@ -358,7 +310,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
 
     ngOnChanges(changes: SimpleChanges) {
 
-        if (this.rowHeight === 'fit' && this.height == null) {
+        if (this.rowHeight() === 'fit' && this.height() == null) {
             console.warn(`KtdGridComponent: The @Input() height should not be null when using rowHeight 'fit'`);
         }
 
@@ -379,7 +331,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
         // Only compact layout if lib user has provided it. Lib users that want to save/store always the same layout  as it is represented (compacted)
         // can use KtdCompactGrid utility and pre-compact the layout. This is the recommended behaviour for always having a the same layout on this component
         // and the ones that uses it.
-        if (needsCompactLayout && this.compactOnPropsChange) {
+        if (needsCompactLayout && this.compactOnPropsChange()) {
             this.compactLayout();
         }
 
@@ -402,7 +354,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     }
 
     compactLayout() {
-        this.layout = compact(this.layout, this.compactType, this.cols);
+        this.layout = compact(this.layout, this.compactType(), this.cols());
     }
 
     getItemsRenderData(): KtdDictionary<KtdGridItemRenderData<number>> {
@@ -415,7 +367,9 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
 
     calculateRenderData() {
         const clientRect = (this.elementRef.nativeElement as HTMLElement).getBoundingClientRect();
-        this.gridCurrentHeight = this.height ?? (this.rowHeight === 'fit' ? clientRect.height : getGridHeight(this.layout, this.rowHeight, this.gap));
+        const rowHeight = this.rowHeight();
+        const gap = this.gap();
+        this.gridCurrentHeight = this.height() ?? (rowHeight === 'fit' ? clientRect.height : getGridHeight(this.layout, rowHeight, gap));
         this._gridItemsRenderData = layoutToRenderItems(this.config, clientRect.width, this.gridCurrentHeight);
 
         // Set Background CSS variables
@@ -432,9 +386,9 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
 
         if (this._backgroundConfig) {
             // structure
-            style.setProperty('--gap', this.gap + 'px');
+            style.setProperty('--gap', this.gap() + 'px');
             style.setProperty('--row-height', rowHeight + 'px');
-            style.setProperty('--columns', `${this.cols}`);
+            style.setProperty('--columns', `${this.cols()}`);
             style.setProperty('--border-width', (this._backgroundConfig.borderWidth ?? defaultBackgroundConfig.borderWidth) + 'px');
 
             // colors
@@ -521,7 +475,8 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     private performDragSequence$(gridItems: KtdGridItemComponent[], pointerDownEvent: MouseEvent | TouchEvent, type: DragActionType): Observable<KtdGridLayout> {
 
         return new Observable<KtdGridLayout>((observer: Observer<KtdGridLayout>) => {
-            const scrollableParent = typeof this.scrollableParent === 'string' ? this.document.getElementById(this.scrollableParent) : this.scrollableParent;
+            const scrollableParentInput = this.scrollableParent();
+            const scrollableParent = typeof scrollableParentInput === 'string' ? this.document.getElementById(scrollableParentInput) : scrollableParentInput;
             // Retrieve grid (parent) client rect.
             const gridElemClientRect: KtdClientRect = getMutableClientRect(this.elementRef.nativeElement as HTMLElement);
 
@@ -553,7 +508,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                         pointerX: ktdPointerClientX(event),
                         pointerY: ktdPointerClientY(event)
                     })),
-                    ktdScrollIfNearElementClientRect$(scrollableParent, {scrollStep: this.scrollSpeed})
+                    ktdScrollIfNearElementClientRect$(scrollableParent, {scrollStep: this.scrollSpeed()})
                 )).pipe(
                     takeUntil(ktdPointerUp(this.document))
                 ).subscribe());
@@ -585,12 +540,12 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                         if (type === 'drag' && gridItems.length > 1) {
                             const {layout, draggedItemPos} = ktdGridItemsDragging(gridItems, {
                                 layout: currentLayout,
-                                rowHeight: this.rowHeight,
-                                height: this.height,
-                                cols: this.cols,
-                                preventCollision: this.preventCollision,
-                                gap: this.gap,
-                            }, this.compactType, {
+                                rowHeight: this.rowHeight(),
+                                height: this.height(),
+                                cols: this.cols(),
+                                preventCollision: this.preventCollision(),
+                                gap: this.gap(),
+                            }, this.compactType(), {
                                 pointerDownEvent,
                                 pointerDragEvent,
                                 gridElemClientRect,
@@ -605,12 +560,12 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                             gridItems.forEach((gridItem)=>{
                                 const {layout, draggedItemPos} = calcNewStateFunc(gridItem, {
                                     layout: newLayout,
-                                    rowHeight: this.rowHeight,
-                                    height: this.height,
-                                    cols: this.cols,
-                                    preventCollision: this.preventCollision,
-                                    gap: this.gap,
-                                }, this.compactType, {
+                                    rowHeight: this.rowHeight(),
+                                    height: this.height(),
+                                    cols: this.cols(),
+                                    preventCollision: this.preventCollision(),
+                                    gap: this.gap(),
+                                }, this.compactType(), {
                                     pointerDownEvent,
                                     pointerDragEvent,
                                     gridElemClientRect,
@@ -622,14 +577,16 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                             });
                         }
 
-                        this.gridCurrentHeight = this.height ?? (this.rowHeight === 'fit' ? gridElemClientRect.height : getGridHeight(newLayout, this.rowHeight, this.gap))
+                        const rowHeight = this.rowHeight();
+                        const gap = this.gap();
+                        this.gridCurrentHeight = this.height() ?? (rowHeight === 'fit' ? gridElemClientRect.height : getGridHeight(newLayout, rowHeight, gap))
                         this._gridItemsRenderData = layoutToRenderItems({
-                            cols: this.cols,
-                            rowHeight: this.rowHeight,
-                            height: this.height,
+                            cols: this.cols(),
+                            rowHeight,
+                            height: this.height(),
                             layout: newLayout,
-                            preventCollision: this.preventCollision,
-                            gap: this.gap,
+                            preventCollision: this.preventCollision(),
+                            gap,
                         }, gridElemClientRect.width, gridElemClientRect.height);
 
                         // Modify the position of the dragged item to be the once we want (for example the mouse position or whatever)
@@ -648,7 +605,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                             };
                         });
 
-                        this.setBackgroundCssVariables(this.rowHeight === 'fit' ? ktdGetGridItemRowHeight(newLayout, gridElemClientRect.height, this.gap) : this.rowHeight);
+                        this.setBackgroundCssVariables(rowHeight === 'fit' ? ktdGetGridItemRowHeight(newLayout, gridElemClientRect.height, gap) : rowHeight);
                         this.render();
 
                         gridItems.forEach((gridItem)=>{
