@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { KtdGridComponent, KtdGridItemComponent, KtdGridLayout, ktdTrackById } from '@katoid/angular-grid-layout';
-import { fromEvent, merge, Subscription } from 'rxjs';
+import { fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { ktdArrayRemoveItem } from '../utils';
 import { RouterModule } from '@angular/router';
@@ -17,6 +18,7 @@ export class KtdRowHeightFitComponent implements OnInit {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;
     @ViewChild('gridContainer', {static: true}) gridContainerElementRef: ElementRef<HTMLDivElement>;
     trackById = ktdTrackById;
+    private readonly destroyRef = inject(DestroyRef);
 
     cols = 12;
     gridHeight: null | number = 500;
@@ -44,18 +46,15 @@ export class KtdRowHeightFitComponent implements OnInit {
     disableResize = false;
     disableRemove = false;
     preventCollision = false;
-    resizeSubscription: Subscription;
-
-    constructor() { }
-
     ngOnInit() {
         this.gridHeight = this.gridContainerElementRef.nativeElement.getBoundingClientRect().height;
 
-        this.resizeSubscription = merge(
+        merge(
             fromEvent(window, 'resize'),
             fromEvent(window, 'orientationchange')
         ).pipe(
             debounceTime(50),
+            takeUntilDestroyed(this.destroyRef)
         ).subscribe(() => {
             const newHeight = this.gridContainerElementRef.nativeElement.getBoundingClientRect().height;
             if (this.gridHeight !== newHeight) {

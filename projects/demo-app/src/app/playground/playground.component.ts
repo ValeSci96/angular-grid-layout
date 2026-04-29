@@ -1,6 +1,7 @@
-import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
+import { Component, DestroyRef, DOCUMENT, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { fromEvent, merge, Subscription } from 'rxjs';
+import { fromEvent, merge } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { KtdDragEnd, KtdDragStart, ktdGridCompact, KtdGridComponent, KtdGridLayout, KtdGridLayoutItem, KtdResizeEnd, KtdResizeStart, ktdTrackById, KtdGridItemComponent, KtdGridItemPlaceholder, KtdGridBackgroundCfg } from '@katoid/angular-grid-layout';
 import { ktdArrayRemoveItem } from '../utils';
@@ -21,9 +22,11 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrls: ['./playground.component.scss'],
     imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, MatOptionModule, MatInputModule, MatCheckboxModule, MatChipsModule, ColorPickerModule, KtdGridComponent, KtdGridItemComponent, KtdGridItemPlaceholder, KtdFooterComponent]
 })
-export class KtdPlaygroundComponent implements OnInit, OnDestroy {
+export class KtdPlaygroundComponent implements OnInit {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;
     trackById = ktdTrackById;
+    private readonly destroyRef = inject(DestroyRef);
+    readonly document = inject<Document>(DOCUMENT);
 
     cols = 12;
     rowHeight = 50;
@@ -79,8 +82,6 @@ export class KtdPlaygroundComponent implements OnInit, OnDestroy {
     isDragging = false;
     isResizing = false;
     showBackground = false;
-    resizeSubscription: Subscription;
-
     gridBackgroundVisibilityOptions = ['never', 'always', 'whenDragging'];
     gridBackgroundConfig: Required<KtdGridBackgroundCfg> = {
         show: 'always',
@@ -91,24 +92,17 @@ export class KtdPlaygroundComponent implements OnInit, OnDestroy {
         columnColor: 'rgba(128, 128, 128, 0.10)',
     };
 
-    constructor(private ngZone: NgZone, public elementRef: ElementRef, @Inject(DOCUMENT) public document: Document) {
-        // this.ngZone.onUnstable.subscribe(() => console.log('UnStable'));
-    }
-
     ngOnInit() {
-        this.resizeSubscription = merge(
+        merge(
             fromEvent(window, 'resize'),
             fromEvent(window, 'orientationchange')
         ).pipe(
             debounceTime(50),
-            filter(() => this.autoResize)
+            filter(() => this.autoResize),
+            takeUntilDestroyed(this.destroyRef)
         ).subscribe(() => {
             this.grid.resize();
         });
-    }
-
-    ngOnDestroy() {
-        this.resizeSubscription.unsubscribe();
     }
 
     onDragStarted(event: KtdDragStart) {

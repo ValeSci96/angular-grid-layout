@@ -1,5 +1,6 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild, DOCUMENT } from '@angular/core';
-import { fromEvent, merge, Subscription } from 'rxjs';
+import { Component, DestroyRef, DOCUMENT, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { KtdGridComponent, KtdGridLayout, ktdTrackById, KtdGridItemComponent, KtdGridDragHandle, KtdGridResizeHandle } from '@katoid/angular-grid-layout';
 
@@ -12,9 +13,11 @@ import { MatIconModule } from '@angular/material/icon';
     styleUrls: ['./custom-handles.component.scss'],
     imports: [KtdGridComponent, KtdGridItemComponent, KtdGridDragHandle, MatIconModule, KtdGridResizeHandle, KtdFooterComponent]
 })
-export class KtdCustomHandlesComponent implements OnInit, OnDestroy {
+export class KtdCustomHandlesComponent implements OnInit {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;
     trackById = ktdTrackById;
+    private readonly destroyRef = inject(DestroyRef);
+    readonly document = inject<Document>(DOCUMENT);
     layout: KtdGridLayout = [
         {id: '0', x: 0, y: 0, w: 3, h: 3},
         {id: '1', x: 3, y: 0, w: 3, h: 4},
@@ -22,23 +25,16 @@ export class KtdCustomHandlesComponent implements OnInit, OnDestroy {
         {id: '3', x: 9, y: 0, w: 3, h: 6}
     ];
 
-    private resizeSubscription: Subscription;
-
-    constructor(@Inject(DOCUMENT) public document: Document) { }
-
     ngOnInit() {
-        this.resizeSubscription = merge(
+        merge(
             fromEvent(window, 'resize'),
             fromEvent(window, 'orientationchange')
         ).pipe(
-            debounceTime(50)
+            debounceTime(50),
+            takeUntilDestroyed(this.destroyRef)
         ).subscribe(() => {
             this.grid.resize();
         });
-    }
-
-    ngOnDestroy() {
-        this.resizeSubscription.unsubscribe();
     }
 
     onLayoutUpdated(layout: KtdGridLayout) {

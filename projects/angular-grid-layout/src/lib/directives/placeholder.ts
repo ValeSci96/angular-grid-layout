@@ -1,4 +1,4 @@
-import { Directive, InjectionToken, Input, TemplateRef } from '@angular/core';
+import { Directive, InjectionToken, Input, TemplateRef, inject } from '@angular/core';
 
 /**
  * Injection token that can be used to reference instances of `KtdGridItemPlaceholder`. It serves as
@@ -21,5 +21,5 @@ export const KTD_GRID_ITEM_PLACEHOLDER = new InjectionToken<KtdGridItemPlacehold
 export class KtdGridItemPlaceholder<T = any> {
     /** Context data to be added to the placeholder template instance. */
     @Input() data: T;
-    constructor(public templateRef: TemplateRef<T>) {}
+    readonly templateRef = inject<TemplateRef<T>>(TemplateRef);
 }

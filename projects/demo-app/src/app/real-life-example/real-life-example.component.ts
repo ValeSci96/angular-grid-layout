@@ -1,8 +1,9 @@
-import { Component, DOCUMENT, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, DestroyRef, DOCUMENT, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     KtdGridComponent, KtdGridLayout, KtdGridItemComponent, KtdGridItemPlaceholder, KtdGridDragHandle
 } from '@katoid/angular-grid-layout';
-import { fromEvent, merge, Subscription } from 'rxjs';
+import { fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { KtdFooterComponent } from '../components/footer/footer.component';
@@ -14,8 +15,10 @@ import { KtdTableSortingComponent } from './table-sorting/table-sorting.componen
     styleUrls: ['./real-life-example.component.scss'],
     imports: [KtdGridComponent, KtdGridItemComponent, KtdGridItemPlaceholder, KtdGridDragHandle, KtdTableSortingComponent, KtdFooterComponent]
 })
-export class KtdRealLifeExampleComponent implements OnInit, OnDestroy {
+export class KtdRealLifeExampleComponent implements OnInit {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;
+    private readonly destroyRef = inject(DestroyRef);
+    readonly document = inject<Document>(DOCUMENT);
 
     cols = 12;
     rowHeight = 50;
@@ -29,23 +32,16 @@ export class KtdRealLifeExampleComponent implements OnInit, OnDestroy {
         {id: '4', x: 8, y: 5, w: 4, h: 10, minW: 3, minH: 5, maxH: 12}
     ];
 
-    private resizeSubscription: Subscription;
-
-    constructor(@Inject(DOCUMENT) public document: Document) { }
-
     ngOnInit() {
-        this.resizeSubscription = merge(
+        merge(
             fromEvent(window, 'resize'),
             fromEvent(window, 'orientationchange')
         ).pipe(
-            debounceTime(50)
+            debounceTime(50),
+            takeUntilDestroyed(this.destroyRef)
         ).subscribe(() => {
             this.grid.resize();
         });
-    }
-
-    ngOnDestroy() {
-        this.resizeSubscription.unsubscribe();
     }
 
 }

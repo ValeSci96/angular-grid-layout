@@ -1,11 +1,11 @@
 import {
-  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, ElementRef, EmbeddedViewRef, EventEmitter, Inject, Input,
-  NgZone, OnChanges, OnDestroy, Output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation,
-  DOCUMENT
+  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, DestroyRef, DOCUMENT, ElementRef, EmbeddedViewRef, EventEmitter, inject, Input,
+  NgZone, OnChanges, Output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { coerceNumberProperty, NumberInput } from './coercion/number-property';
 import { KtdGridItemComponent } from './grid-item/grid-item.component';
-import { combineLatest, merge, NEVER, Observable, Observer, of, Subscription } from 'rxjs';
+import { combineLatest, merge, NEVER, Observable, Observer, of } from 'rxjs';
 import { exhaustMap, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { ktdGetGridItemRowHeight, ktdGridItemDragging, ktdGridItemLayoutItemAreEqual, ktdGridItemResizing, ktdGridItemsDragging } from './utils/grid.utils';
 import { compact } from './utils/react-grid-layout.utils';
@@ -138,7 +138,7 @@ const defaultBackgroundConfig: Required<Omit<KtdGridBackgroundCfg, 'show'>> = {
         }
     ]
 })
-export class KtdGridComponent implements OnChanges, AfterContentInit, AfterContentChecked, OnDestroy {
+export class KtdGridComponent implements OnChanges, AfterContentInit, AfterContentChecked {
     /** Query list of grid items that are being rendered. */
     @ContentChildren(KtdGridItemComponent, {descendants: true}) _gridItems: QueryList<KtdGridItemComponent>;
 
@@ -348,16 +348,13 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     private placeholder: KtdDictionary<HTMLElement | null>={};
 
     private _gridItemsRenderData: KtdDictionary<KtdGridItemRenderData<number>>;
-    private subscriptions: Subscription[] = [];
-
-    constructor(private gridService: KtdGridService,
-                private elementRef: ElementRef,
-                private viewContainerRef: ViewContainerRef,
-                private renderer: Renderer2,
-                private ngZone: NgZone,
-                @Inject(DOCUMENT) private document: Document) {
-
-    }
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly gridService = inject(KtdGridService);
+    private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+    private readonly viewContainerRef = inject(ViewContainerRef);
+    private readonly renderer = inject(Renderer2);
+    private readonly ngZone = inject(NgZone);
+    private readonly document = inject(DOCUMENT);
 
     ngOnChanges(changes: SimpleChanges) {
 
@@ -402,10 +399,6 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     resize() {
         this.calculateRenderData();
         this.render();
-    }
-
-    ngOnDestroy() {
-        this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 
     compactLayout() {
@@ -479,8 +472,7 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     }
 
     private initSubscriptions() {
-        this.subscriptions = [
-            this._gridItems.changes.pipe(
+        this._gridItems.changes.pipe(
                 startWith(this._gridItems),
                 switchMap((gridItems: QueryList<KtdGridItemComponent>) => {
                     return merge(
@@ -504,7 +496,8 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
                             map((layout) => ({layout, gridItem, type, multipleSelection})));
 
                     }));
-                })
+                }),
+                takeUntilDestroyed(this.destroyRef)
             ).subscribe(({layout, gridItem, type, multipleSelection} : {layout: KtdGridLayout, gridItem: KtdGridItemComponent, type: DragActionType, multipleSelection?: KtdGridItemComponent[]}) => {
                 this.layout = layout;
                 // Calculate new rendering data given the new layout.
@@ -516,8 +509,6 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
 
                 this.setGridBackgroundVisible(this._backgroundConfig?.show === 'always');
             })
-
-        ];
     }
 
     /**

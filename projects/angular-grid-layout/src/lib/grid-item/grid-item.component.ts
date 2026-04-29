@@ -1,9 +1,9 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, ElementRef, HostBinding, Inject, Input, NgZone, OnDestroy, OnInit,
+  AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, DestroyRef, DOCUMENT, ElementRef, HostBinding, inject, Input, NgZone, OnInit,
   QueryList, Renderer2, ViewChild,
-  DOCUMENT
 } from '@angular/core';
-import { BehaviorSubject, NEVER, Observable, Subject, Subscription, iif, merge } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, NEVER, Observable, Subject, iif, merge } from 'rxjs';
 import { exhaustMap, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { BooleanInput, coerceBooleanProperty } from '../coercion/boolean-property';
 import { NumberInput, coerceNumberProperty } from '../coercion/number-property';
@@ -23,7 +23,7 @@ import { ktdIsMouseEventOrMousePointerEvent, ktdPointerClient, ktdPointerDown, k
     styleUrls: ['./grid-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit {
+export class KtdGridItemComponent implements OnInit, AfterContentInit {
     /** Elements that can be used to drag the grid item. */
     @ContentChildren(KTD_GRID_DRAG_HANDLE, {descendants: true}) _dragHandles: QueryList<KtdGridDragHandle>;
     @ContentChildren(KTD_GRID_RESIZE_HANDLE, {descendants: true}) _resizeHandles: QueryList<KtdGridResizeHandle>;
@@ -45,9 +45,6 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
     @HostBinding('style.touch-action') get touchAction(): string {
         return this._draggable ? 'none' : 'auto';
     }
-
-    dragStart$: Observable<MouseEvent | TouchEvent>;
-    resizeStart$: Observable<MouseEvent | TouchEvent>;
 
     /** Id of the grid item. This property is strictly compulsory. */
     @Input()
@@ -105,17 +102,16 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
     private dragStartSubject: Subject<MouseEvent | TouchEvent> = new Subject<MouseEvent | TouchEvent>();
     private resizeStartSubject: Subject<MouseEvent | TouchEvent> = new Subject<MouseEvent | TouchEvent>();
 
-    private subscriptions: Subscription[] = [];
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly gridService = inject(KtdGridService);
+    private readonly renderer = inject(Renderer2);
+    private readonly ngZone = inject(NgZone);
+    private readonly document = inject<Document>(DOCUMENT);
+    private readonly getItemRenderData = inject<KtdGridItemRenderDataTokenType>(GRID_ITEM_GET_RENDER_DATA_TOKEN);
 
-    constructor(public elementRef: ElementRef,
-                private gridService: KtdGridService,
-                private renderer: Renderer2,
-                private ngZone: NgZone,
-                @Inject(DOCUMENT) private document: Document,
-                @Inject(GRID_ITEM_GET_RENDER_DATA_TOKEN) private getItemRenderData: KtdGridItemRenderDataTokenType) {
-        this.dragStart$ = this.dragStartSubject.asObservable();
-        this.resizeStart$ = this.resizeStartSubject.asObservable();
-    }
+    dragStart$ = this.dragStartSubject.asObservable();
+    resizeStart$ = this.resizeStartSubject.asObservable();
 
     ngOnInit() {
         const gridItemRenderData = this.getItemRenderData(this.id)!;
@@ -123,14 +119,12 @@ export class KtdGridItemComponent implements OnInit, OnDestroy, AfterContentInit
     }
 
     ngAfterContentInit() {
-        this.subscriptions.push(
-            this._dragStart$().subscribe(this.dragStartSubject),
-            this._resizeStart$().subscribe(this.resizeStartSubject),
-        );
-    }
-
-    ngOnDestroy() {
-        this.subscriptions.forEach(sub => sub.unsubscribe());
+        this._dragStart$()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(this.dragStartSubject);
+        this._resizeStart$()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(this.resizeStartSubject);
     }
 
     /**
