@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -16,6 +16,7 @@ const defaultTitle = 'Angular Grid Layout';
 export class KtdAppComponent {
     title: string = defaultTitle;
     private readonly destroyRef = inject(DestroyRef);
+    private readonly changeDetectorRef = inject(ChangeDetectorRef);
     private readonly matIconRegistry = inject(MatIconRegistry);
     private readonly domSanitizer = inject(DomSanitizer);
     private readonly router = inject(Router);
@@ -32,6 +33,7 @@ export class KtdAppComponent {
             if (data instanceof RoutesRecognized) {
                 const firstChild = data.state.root;
                 this.title = this.getTitle(firstChild) || defaultTitle;
+                this.changeDetectorRef.markForCheck();
             }
         });
     }

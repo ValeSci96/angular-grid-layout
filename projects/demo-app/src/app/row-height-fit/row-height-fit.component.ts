@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { KtdGridComponent, KtdGridItemComponent, KtdGridLayout, ktdTrackById } from '@katoid/angular-grid-layout';
@@ -18,6 +18,7 @@ export class KtdRowHeightFitComponent implements OnInit {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;
     @ViewChild('gridContainer', {static: true}) gridContainerElementRef: ElementRef<HTMLDivElement>;
     trackById = ktdTrackById;
+    private readonly changeDetectorRef = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
 
     cols = 12;
@@ -59,6 +60,7 @@ export class KtdRowHeightFitComponent implements OnInit {
             const newHeight = this.gridContainerElementRef.nativeElement.getBoundingClientRect().height;
             if (this.gridHeight !== newHeight) {
                 this.gridHeight = this.gridContainerElementRef.nativeElement.getBoundingClientRect().height;
+                this.changeDetectorRef.markForCheck();
             } else { // If grid height is the same, resize ii in case only the width has changed.
                 this.grid.resize();
             }

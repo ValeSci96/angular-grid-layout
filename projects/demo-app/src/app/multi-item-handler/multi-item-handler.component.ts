@@ -1,4 +1,4 @@
-import { Component, DestroyRef, DOCUMENT, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, DOCUMENT, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import {
@@ -377,6 +377,7 @@ const multiItemSeparatedDragBug = [
 export class KtdMultiItemHandlerComponent implements OnInit {
     @ViewChild(KtdGridComponent, {static: true}) grid: KtdGridComponent;
     trackById = ktdTrackById;
+    private readonly changeDetectorRef = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
     readonly document = inject<Document>(DOCUMENT);
 
@@ -399,6 +400,7 @@ export class KtdMultiItemHandlerComponent implements OnInit {
             takeUntilDestroyed(this.destroyRef)
         ).subscribe(() => {
             this.duplicateSelectedElements();
+            this.changeDetectorRef.markForCheck();
         });
 
         merge(
