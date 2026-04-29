@@ -12,7 +12,8 @@
         [layout]="layout1"
         [scrollableParent]="gridContainer1"
         [scrollSpeed]="scrollSpeed"
-        [compactType]="compactType">
+        [compactType]="compactType"
+        (layoutUpdated)="onLayout1Updated($event)">
         @for (item of layout1; track trackById($index, item)) {
           <ktd-grid-item
             [id]="item.id">
@@ -31,7 +32,8 @@
         [layout]="layout2"
         [scrollableParent]="gridContainer2"
         [scrollSpeed]="scrollSpeed"
-        [compactType]="compactType">
+        [compactType]="compactType"
+        (layoutUpdated)="onLayout2Updated($event)">
         @for (item of layout2; track trackById($index, item)) {
           <ktd-grid-item
             [id]="item.id">
@@ -43,4 +45,3 @@
   </div>
 </div>
 <ktd-footer></ktd-footer>
-

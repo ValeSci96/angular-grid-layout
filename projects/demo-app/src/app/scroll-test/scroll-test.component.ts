@@ -81,4 +81,12 @@ export class KtdScrollTestComponent implements OnInit {
     onScrollSpeedChange(event: Event) {
         this.scrollSpeed = coerceNumberProperty((event.target as HTMLInputElement).value);
     }
+
+    onLayout1Updated(layout: KtdGridLayout) {
+        this.layout1 = layout;
+    }
+
+    onLayout2Updated(layout: KtdGridLayout) {
+        this.layout2 = layout;
+    }
 }

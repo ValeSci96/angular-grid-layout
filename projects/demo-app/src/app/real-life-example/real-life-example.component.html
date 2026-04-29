@@ -3,7 +3,8 @@
               [rowHeight]="rowHeight"
               [layout]="layout"
               [scrollableParent]="document"
-              [compactType]="compactType">
+              [compactType]="compactType"
+              (layoutUpdated)="onLayoutUpdated($event)">
         <ktd-grid-item id="0" minW="4">
             <div class="info-panel">
                 <p class="eyebrow">Example 01</p>
