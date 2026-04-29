@@ -3,8 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, RouterOutlet } from '@angular/router';
-import { Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterOutlet, RoutesRecognized } from '@angular/router';
 
 const defaultTitle = 'Angular Grid Layout';
 
@@ -39,8 +38,8 @@ export class KtdAppComponent {
 
     getTitle(firstChild: ActivatedRouteSnapshot | null) {
         while (firstChild) {
-            if (firstChild.data?.title) {
-                return firstChild.data.title;
+            if (firstChild.title) {
+                return firstChild.title;
             }
             return this.getTitle(firstChild?.firstChild);
         }
