@@ -117,8 +117,10 @@ export class KtdGridItemComponent implements OnInit, AfterContentInit {
     });
 
     ngOnInit() {
-        const gridItemRenderData = this.getItemRenderData(this.id)!;
-        this.setStyles(gridItemRenderData);
+        const gridItemRenderData = this.getItemRenderData(this.id);
+        if (gridItemRenderData) {
+            this.setStyles(gridItemRenderData);
+        }
     }
 
     ngAfterContentInit() {
