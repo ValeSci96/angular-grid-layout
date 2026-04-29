@@ -2,12 +2,11 @@ import { Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild, DO
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { KtdDragEnd, KtdDragStart, ktdGridCompact, KtdGridComponent, KtdGridLayout, KtdGridLayoutItem, KtdResizeEnd, KtdResizeStart, ktdTrackById, KtdGridItemComponent, KtdGridItemPlaceholder } from '@katoid/angular-grid-layout';
+import { KtdDragEnd, KtdDragStart, ktdGridCompact, KtdGridComponent, KtdGridLayout, KtdGridLayoutItem, KtdResizeEnd, KtdResizeStart, ktdTrackById, KtdGridItemComponent, KtdGridItemPlaceholder, KtdGridBackgroundCfg } from '@katoid/angular-grid-layout';
 import { ktdArrayRemoveItem } from '../utils';
 
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
-import { KtdGridBackgroundCfg } from '../../../../angular-grid-layout/src/lib/grid.definitions';
 import { KtdFooterComponent } from '../components/footer/footer.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatChipsModule } from '@angular/material/chips';

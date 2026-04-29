@@ -22,6 +22,7 @@
       ],
       "paths": {
         "@katoid/angular-grid-layout": [
+          "projects/angular-grid-layout/src/public-api.ts",
           "dist/angular-grid-layout"
         ]
       }
