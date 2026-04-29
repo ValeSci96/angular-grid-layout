@@ -6,10 +6,6 @@ import { KtdGridResizeHandle } from './directives/resize-handle';
 import { KtdGridItemPlaceholder } from './directives/placeholder';
 import { KtdGridService } from './grid.service';
 
-/**
- * Legacy compatibility wrapper for NgModule-based applications.
- * Prefer importing the standalone components and directives directly.
- */
 @NgModule({
     imports: [
         KtdGridComponent,
@@ -30,6 +26,9 @@ import { KtdGridService } from './grid.service';
     ]
 })
 /**
- * @deprecated Prefer the standalone imports from `@katoid/angular-grid-layout`.
+ * Legacy compatibility wrapper for NgModule-based applications.
+ *
+ * @deprecated Use the standalone components and directives directly.
+ * This NgModule is kept only for legacy compatibility and will be removed in the next major version.
  */
 export class KtdGridModule {}

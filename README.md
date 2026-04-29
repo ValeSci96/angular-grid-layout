@@ -83,7 +83,9 @@ export class DashboardComponent {
 }
 ```
 
-If your application still uses NgModules, `KtdGridModule` is still available as a legacy compatibility wrapper, but the recommended API is standalone-first.
+If your application still uses NgModules, `KtdGridModule` is still available as a legacy compatibility wrapper.
+It is deprecated, it is no longer used by the main examples, and it will be removed in the next major version.
+The recommended API is standalone-first.
 
 Legacy compatibility example:
 
@@ -91,6 +93,9 @@ Legacy compatibility example:
 import { NgModule } from '@angular/core';
 import { KtdGridModule } from '@katoid/angular-grid-layout';
 
+/**
+ * @deprecated Prefer standalone imports from `@katoid/angular-grid-layout`.
+ */
 @NgModule({
   imports: [KtdGridModule]
 })
@@ -133,7 +138,9 @@ trackById = ktdTrackById
 
 ## API
 
-Here is listed the basic API of both KtdGridComponent and KtdGridItemComponent. See source code for full knowledge of the API.
+Here is listed the basic template API of both `KtdGridComponent` and `KtdGridItemComponent`.
+Internally the library uses Angular signal inputs/outputs, but template binding remains the same for consumers.
+See source code for full knowledge of the API.
 
 #### KtdGridComponent
 ```ts
