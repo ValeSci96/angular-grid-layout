@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, DestroyRef, DOCUMENT, ElementRef, HostBinding, inject, Input, NgZone, OnInit,
+  AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ContentChildren, DestroyRef, DOCUMENT, effect, ElementRef, HostBinding, inject, input, NgZone, OnInit,
   QueryList, Renderer2, ViewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -33,71 +33,56 @@ export class KtdGridItemComponent implements OnInit, AfterContentInit {
     @ContentChild(KTD_GRID_ITEM_PLACEHOLDER) placeholder: KtdGridItemPlaceholder;
 
     /** Min and max size input properties. Any of these would 'override' the min/max values specified in the layout. */
-    @Input() minW?: number;
-    @Input() minH?: number;
-    @Input() maxW?: number;
-    @Input() maxH?: number;
+    readonly _minWInput = input<number | undefined, NumberInput>(undefined, {
+        alias: 'minW',
+        transform: (value: NumberInput) => value == null ? undefined : coerceNumberProperty(value)
+    });
+    readonly _minHInput = input<number | undefined, NumberInput>(undefined, {
+        alias: 'minH',
+        transform: (value: NumberInput) => value == null ? undefined : coerceNumberProperty(value)
+    });
+    readonly _maxWInput = input<number | undefined, NumberInput>(undefined, {
+        alias: 'maxW',
+        transform: (value: NumberInput) => value == null ? undefined : coerceNumberProperty(value)
+    });
+    readonly _maxHInput = input<number | undefined, NumberInput>(undefined, {
+        alias: 'maxH',
+        transform: (value: NumberInput) => value == null ? undefined : coerceNumberProperty(value)
+    });
 
     /** CSS transition style. Note that for more performance is preferable only make transition on transform property. */
-    @Input() transition: string = 'transform 500ms ease, width 500ms ease, height 500ms ease';
+    readonly _transitionInput = input('transform 500ms ease, width 500ms ease, height 500ms ease', {alias: 'transition'});
 
     /** Dynamically apply `touch-action` to the host element based on draggable */
     @HostBinding('style.touch-action') get touchAction(): string {
-        return this._draggable ? 'none' : 'auto';
+        return this.draggable ? 'none' : 'auto';
     }
 
     /** Id of the grid item. This property is strictly compulsory. */
-    @Input()
-    get id(): string {
-        return this._id;
-    }
-
-    set id(val: string) {
-        this._id = val;
-    }
-
-    private _id: string;
+    readonly _idInput = input.required<string>({alias: 'id'});
 
     /** Minimum amount of pixels that the user should move before it starts the drag sequence. */
-    @Input()
-    get dragStartThreshold(): number { return this._dragStartThreshold; }
-
-    set dragStartThreshold(val: number) {
-        this._dragStartThreshold = coerceNumberProperty(val);
-    }
-
-    private _dragStartThreshold: number = 0;
+    readonly _dragStartThresholdInput = input(0, {
+        alias: 'dragStartThreshold',
+        transform: (value: NumberInput) => coerceNumberProperty(value)
+    });
 
 
     /** Whether the item is draggable or not. Defaults to true. Does not affect manual dragging using the startDragManually method. */
-    @Input()
-    get draggable(): boolean {
-        return this._draggable;
-    }
-
-    set draggable(val: boolean) {
-        this._draggable = coerceBooleanProperty(val);
-        this._draggable$.next(this._draggable);
-    }
-
-    private _draggable: boolean = true;
-    private _draggable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._draggable);
+    readonly _draggableInput = input(true, {
+        alias: 'draggable',
+        transform: (value: BooleanInput) => coerceBooleanProperty(value)
+    });
+    private _draggable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.draggable);
 
     private _manualDragEvents$: Subject<MouseEvent | TouchEvent> = new Subject<MouseEvent | TouchEvent>();
 
     /** Whether the item is resizable or not. Defaults to true. */
-    @Input()
-    get resizable(): boolean {
-        return this._resizable;
-    }
-
-    set resizable(val: boolean) {
-        this._resizable = coerceBooleanProperty(val);
-        this._resizable$.next(this._resizable);
-    }
-
-    private _resizable: boolean = true;
-    private _resizable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._resizable);
+    readonly _resizableInput = input(true, {
+        alias: 'resizable',
+        transform: (value: BooleanInput) => coerceBooleanProperty(value)
+    });
+    private _resizable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.resizable);
 
     private dragStartSubject: Subject<MouseEvent | TouchEvent> = new Subject<MouseEvent | TouchEvent>();
     private resizeStartSubject: Subject<MouseEvent | TouchEvent> = new Subject<MouseEvent | TouchEvent>();
@@ -112,6 +97,24 @@ export class KtdGridItemComponent implements OnInit, AfterContentInit {
 
     dragStart$ = this.dragStartSubject.asObservable();
     resizeStart$ = this.resizeStartSubject.asObservable();
+
+    get minW(): number | undefined { return this._minWInput(); }
+    get minH(): number | undefined { return this._minHInput(); }
+    get maxW(): number | undefined { return this._maxWInput(); }
+    get maxH(): number | undefined { return this._maxHInput(); }
+    get transition(): string { return this._transitionInput(); }
+    get id(): string { return this._idInput(); }
+    get dragStartThreshold(): number { return this._dragStartThresholdInput(); }
+    get draggable(): boolean { return this._draggableInput(); }
+    get resizable(): boolean { return this._resizableInput(); }
+
+    private readonly _draggableEffect = effect(() => {
+        this._draggable$.next(this.draggable);
+    });
+
+    private readonly _resizableEffect = effect(() => {
+        this._resizable$.next(this.resizable);
+    });
 
     ngOnInit() {
         const gridItemRenderData = this.getItemRenderData(this.id)!;

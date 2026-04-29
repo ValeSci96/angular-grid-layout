@@ -1,6 +1,6 @@
 import {
-  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, DestroyRef, DOCUMENT, ElementRef, EmbeddedViewRef, EventEmitter, inject, Input,
-  NgZone, OnChanges, Output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation,
+  AfterContentChecked, AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, DestroyRef, DOCUMENT, ElementRef, EmbeddedViewRef, inject, Input,
+  NgZone, OnChanges, output, QueryList, Renderer2, SimpleChanges, ViewContainerRef, ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { coerceNumberProperty, NumberInput } from './coercion/number-property';
@@ -143,22 +143,22 @@ export class KtdGridComponent implements OnChanges, AfterContentInit, AfterConte
     @ContentChildren(KtdGridItemComponent, {descendants: true}) _gridItems: QueryList<KtdGridItemComponent>;
 
     /** Emits when layout change */
-    @Output() layoutUpdated: EventEmitter<KtdGridLayout> = new EventEmitter<KtdGridLayout>();
+    layoutUpdated = output<KtdGridLayout>();
 
     /** Emits when drag starts */
-    @Output() dragStarted: EventEmitter<KtdDragStart> = new EventEmitter<KtdDragStart>();
+    dragStarted = output<KtdDragStart>();
 
     /** Emits when resize starts */
-    @Output() resizeStarted: EventEmitter<KtdResizeStart> = new EventEmitter<KtdResizeStart>();
+    resizeStarted = output<KtdResizeStart>();
 
     /** Emits when drag ends */
-    @Output() dragEnded: EventEmitter<KtdDragEnd> = new EventEmitter<KtdDragEnd>();
+    dragEnded = output<KtdDragEnd>();
 
     /** Emits when resize ends */
-    @Output() resizeEnded: EventEmitter<KtdResizeEnd> = new EventEmitter<KtdResizeEnd>();
+    resizeEnded = output<KtdResizeEnd>();
 
     /** Emits when a grid item is being resized and its bounds have changed */
-    @Output() gridItemResize: EventEmitter<KtdGridItemResizeEvent> = new EventEmitter<KtdGridItemResizeEvent>();
+    gridItemResize = output<KtdGridItemResizeEvent>();
 
     /**
      * Parent element that contains the scroll. If an string is provided it would search that element by id on the dom.
